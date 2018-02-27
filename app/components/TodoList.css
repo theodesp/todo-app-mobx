@@ -1,0 +1,42 @@
+.todo-list-container {
+    min-width: 320px;
+    max-width: 340px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.todo-list-container .header-section {
+    height: 100px;
+    padding: 10px;
+    color: black;
+    background: url('https://placeimg.com/320/100/nature') center center;
+}
+
+.todo-list-container .header-section h1 {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.todo-list-container .content-section {
+    margin: 10px 0;
+}
+
+.todo-list-container .todo-list-input {
+    box-sizing: border-box;
+    margin: 0;
+    display: inline-block;
+    padding: 4px 11px;
+    width: 100%;
+    outline: 0;
+    height: 32px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+.todo-list-container .todo-list-input::placeholder {
+    font-style: italic;
+    color: #ccc;
+    font-size: 18px;
+}
+

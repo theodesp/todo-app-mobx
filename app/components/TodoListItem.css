@@ -1,0 +1,31 @@
+.todo-list-item {
+    position: relative;
+    margin: 0.5rem 0;
+}
+
+.todo-list-item:not(:last-child) {
+    border-bottom: 1px dotted #ededed;
+}
+
+.todo-list-item .todo-list-title {
+    margin: 0 10px 0 25px;
+}
+
+.todo-list-item .round-checkbox {
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.todo-list-item .round-checkbox.checked + .todo-list-title {
+    color: #d9d9d9;
+    text-decoration: line-through;
+    transition: all .3s;
+}
+
+.todo-list-item .destroy {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    font-size: 14px;
+}
