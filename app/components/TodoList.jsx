@@ -1,10 +1,22 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
-import TodoListItem from './TodoListItem';
-import './TodoList.css';
+import React from "react";
+import * as PropTypes from "prop-types";
+import { observer } from "mobx-react";
+import TodoListItem from "./TodoListItem";
+import "./TodoList.css";
 
-export const TodoList = ({ todos, onSubmitTodo, newTodoTitle, onInputChange, remainingCount, onDelete }) => {
+export const TodoList = ({
+  fetchTodos,
+  todos,
+  onSubmitTodo,
+  newTodoTitle,
+  onInputChange,
+  remainingCount,
+  onDelete,
+}) => {
+  const componentWillMount = () => {
+    fetchTodos();
+  };
+
   const handleOnSubmitTodo = (e) => {
     e.preventDefault();
     onSubmitTodo();
@@ -34,15 +46,20 @@ export const TodoList = ({ todos, onSubmitTodo, newTodoTitle, onInputChange, rem
         </section>
       </form>
       <ul className="todo-items">
-        {
-          todos.map((todoItem) => (
-            <TodoListItem todoItem={todoItem} key={todoItem.id} onDelete={handleOnDelete}/>))
-        }
+        {todos.map((todoItem) => (
+          <TodoListItem
+            todoItem={todoItem}
+            key={todoItem.id}
+            onDelete={handleOnDelete}
+          />
+        ))}
       </ul>
       <hr />
-      <span className="text-italic tasks-left">Tasks left: {remainingCount}</span>
+      <span className="text-italic tasks-left">
+        Tasks left: {remainingCount}
+      </span>
     </div>
-  )
+  );
 };
 
 TodoList.propTypes = {
@@ -50,7 +67,7 @@ TodoList.propTypes = {
   onSubmitTodo: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   newTodoTitle: PropTypes.string.isRequired,
-  remainingCount: PropTypes.number.isRequired
+  remainingCount: PropTypes.number.isRequired,
 };
 
-export default observer(TodoList)
+export default observer(TodoList);
