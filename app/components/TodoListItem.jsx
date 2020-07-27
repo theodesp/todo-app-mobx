@@ -1,14 +1,12 @@
 import React from "react";
-import { observer } from "mobx-react";
+import { observer, action } from "mobx-react";
 import * as PropTypes from "prop-types";
 import "./TodoListItem.css";
 
-export const TodoListItem = ({ todoItem, onDelete }) => {
-  const handleOnItemClick = () =>
-    (todoItem.attributes.isDone = !todoItem.attributes.isDone);
-  const handleOnDelete = (id) => () => {
-    onDelete(id);
-  };
+export const TodoListItem = ({ todoItem, onDelete, onChange }) => {
+  const handleOnItemClick = () => onChange(todoItem);
+
+  const handleOnDelete = () => onDelete(todoItem);
 
   return (
     <li className="todo-list-item">
@@ -21,6 +19,7 @@ export const TodoListItem = ({ todoItem, onDelete }) => {
           id={`checkbox-item-${todoItem.id}-input`}
           type="checkbox"
           checked={todoItem.attributes.isDone}
+          onChange={(e) => e}
         />
         <label
           id={`checkbox-item-${todoItem.id}-label`}
@@ -31,7 +30,7 @@ export const TodoListItem = ({ todoItem, onDelete }) => {
       <i
         className="far fa-trash-alt destroy clickable"
         id={`checkbox-item-destroy-${todoItem.id}-icon`}
-        onClick={handleOnDelete(todoItem.id)}
+        onClick={handleOnDelete}
       />
     </li>
   );
@@ -40,6 +39,7 @@ export const TodoListItem = ({ todoItem, onDelete }) => {
 TodoListItem.propTypes = {
   todoItem: PropTypes.object.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default observer(TodoListItem);

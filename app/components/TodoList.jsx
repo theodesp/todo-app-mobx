@@ -11,6 +11,7 @@ export const TodoList = ({
   onInputChange,
   remainingCount,
   onDelete,
+  onChange,
 }) => {
   const handleOnSubmitTodo = (e) => {
     e.preventDefault();
@@ -22,7 +23,9 @@ export const TodoList = ({
     onInputChange(e);
   };
 
-  const handleOnDelete = (id) => onDelete(id);
+  const handleOnDelete = (todoItem) => onDelete(todoItem);
+
+  const handleOnChange = (todoItem) => onChange(todoItem);
 
   return (
     <div className="card todo-list-container">
@@ -45,6 +48,7 @@ export const TodoList = ({
           <TodoListItem
             todoItem={todoItem}
             key={todoItem.id}
+            onChange={handleOnChange}
             onDelete={handleOnDelete}
           />
         ))}
@@ -58,9 +62,10 @@ export const TodoList = ({
 };
 
 TodoList.propTypes = {
-  todos: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired,
   onSubmitTodo: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   newTodoTitle: PropTypes.string.isRequired,
   remainingCount: PropTypes.number.isRequired,
 };

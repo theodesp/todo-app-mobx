@@ -7,7 +7,7 @@ import TodoList from "../components/TodoList";
 import { selectTodoListStore } from "../selectors/todoListStoreSelectors";
 
 class UnwrappedTodoListContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.todoListStore.fetchTodos();
   }
 
@@ -17,7 +17,8 @@ class UnwrappedTodoListContainer extends React.Component {
     const { todoListStore } = this.props;
     const handleOnInputChange = (e) => this.handleOnInputChange(e);
     const handleOnSubmitTodo = () => this.handleOnSubmitTodo();
-    const handleOnDelete = (id) => this.handleOnDelete(id);
+    const handleOnDelete = (todoItem) => this.handleOnDelete(todoItem);
+    const handleOnChange = (todoItem) => this.handleOnChange(todoItem);
 
     return (
       <TodoList
@@ -26,6 +27,7 @@ class UnwrappedTodoListContainer extends React.Component {
         onSubmitTodo={handleOnSubmitTodo}
         newTodoTitle={this.newTodoTitle}
         onDelete={handleOnDelete}
+        onChange={handleOnChange}
         remainingCount={todoListStore.remainingCount}
       />
     );
@@ -43,8 +45,13 @@ class UnwrappedTodoListContainer extends React.Component {
   }
 
   @action
-  handleOnDelete(id) {
-    this.props.todoListStore.removeTodoItem(id);
+  handleOnDelete(todoItem) {
+    this.props.todoListStore.removeTodoItem(todoItem);
+  }
+
+  @action
+  handleOnChange(todoItem) {
+    this.props.todoListStore.updateTodo(todoItem);
   }
 }
 
