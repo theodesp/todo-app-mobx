@@ -1,7 +1,10 @@
-import { observable, computed, action } from "mobx";
+import { observable, computed, action, runInAction } from "mobx";
 import TodoItem from "./TodoItem";
-import Parse from "parse/react-native";
+import Parse from "parse";
 import { ParseMobx } from "parse-mobx";
+
+Parse.initialize("U84TlyqcG8WBYa1iDI9eksVQEDKPpEeD7FgC4zs2");
+Parse.serverURL = "http://localhost:8000/parse";
 
 export class TodoListStore {
   @observable todoItems = [];
@@ -30,9 +33,9 @@ export class TodoListStore {
   @action
   async fetchTodos() {
     this.loading = true;
-    const todos = await new Parse.Query("todo").find();
+    const todos = await new Parse.Query("Todo").find();
     runInAction(() => {
-      this.todos = ParseMobx.toParseMobx(todos);
+      this.todoItems = ParseMobx.toParseMobx(todos);
       this.loading = false;
     });
   }

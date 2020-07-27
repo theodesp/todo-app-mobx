@@ -5,7 +5,6 @@ import TodoListItem from "./TodoListItem";
 import "./TodoList.css";
 
 export const TodoList = ({
-  fetchTodos,
   todos,
   onSubmitTodo,
   newTodoTitle,
@@ -13,10 +12,6 @@ export const TodoList = ({
   remainingCount,
   onDelete,
 }) => {
-  const componentWillMount = () => {
-    fetchTodos();
-  };
-
   const handleOnSubmitTodo = (e) => {
     e.preventDefault();
     onSubmitTodo();

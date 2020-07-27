@@ -7,6 +7,10 @@ import TodoList from "../components/TodoList";
 import { selectTodoListStore } from "../selectors/todoListStoreSelectors";
 
 class UnwrappedTodoListContainer extends React.Component {
+  componentWillMount() {
+    this.props.todoListStore.fetchTodos();
+  }
+
   @observable newTodoTitle = "";
 
   render() {
@@ -23,7 +27,6 @@ class UnwrappedTodoListContainer extends React.Component {
         newTodoTitle={this.newTodoTitle}
         onDelete={handleOnDelete}
         remainingCount={todoListStore.remainingCount}
-        fetchTodos={todoListStore.fetchTodos}
       />
     );
   }
